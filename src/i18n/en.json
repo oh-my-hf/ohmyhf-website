@@ -14,7 +14,8 @@
     "switchToEn": "English",
     "language": "Language",
     "primary": "Primary",
-    "mobile": "Mobile"
+    "mobile": "Mobile",
+    "skipToContent": "Skip to content"
   },
   "hero": {
     "region": "Hero",

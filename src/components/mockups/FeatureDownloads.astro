@@ -38,9 +38,9 @@ const jobs = [
       <span class="h-2 w-2 rounded-full bg-[#FF5F57]"></span>
       <span class="h-2 w-2 rounded-full bg-[#FEBC2E]"></span>
       <span class="h-2 w-2 rounded-full bg-[#28C840]"></span>
-      <span class="ml-2 font-mono text-[10px] text-fog/70">Downloads</span>
+      <span class="ml-2 font-mono text-[10px] text-fog">Downloads</span>
     </div>
-    <span class="font-mono text-[9px] text-fog/60">4 in queue</span>
+    <span class="font-mono text-[9px] text-fog">4 in queue</span>
   </div>
   <ul class="divide-y divide-line/60 p-2 sm:p-3">
     {
@@ -101,7 +101,7 @@ const jobs = [
             >
             </div>
           </div>
-          <div class="mt-1 font-mono text-[9px] text-fog/50">
+          <div class="mt-1 font-mono text-[9px] text-fog">
             {job.pct}%
             {job.status === 'verifying' ? ' · verifying sha256' : ''}
             {job.status === 'paused' ? ' · paused' : ''}

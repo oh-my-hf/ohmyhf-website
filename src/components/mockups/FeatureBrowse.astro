@@ -19,7 +19,7 @@ const nav = ['Models', 'Datasets', 'Spaces', 'Papers'] as const;
     <span class="h-2 w-2 rounded-full bg-[#FF5F57]"></span>
     <span class="h-2 w-2 rounded-full bg-[#FEBC2E]"></span>
     <span class="h-2 w-2 rounded-full bg-[#28C840]"></span>
-    <span class="ml-2 font-mono text-[10px] text-fog/70">Browse</span>
+    <span class="ml-2 font-mono text-[10px] text-fog">Browse</span>
   </div>
   <div class="grid h-[calc(100%-2rem)] grid-cols-[4.5rem_1fr] sm:grid-cols-[7rem_minmax(0,1.2fr)_minmax(0,0.9fr)]">
     <aside class="flex flex-col gap-0.5 border-r border-line bg-ink/40 p-1.5">
@@ -28,7 +28,7 @@ const nav = ['Models', 'Datasets', 'Spaces', 'Papers'] as const;
           <div
             class:list={[
               'rounded-sm px-1.5 py-1.5 font-mono text-[9px] sm:text-[10px]',
-              i === 0 ? 'bg-iris/15 text-paper' : 'text-fog/70',
+              i === 0 ? 'bg-iris/15 text-paper' : 'text-fog',
             ]}
           >
             {label}
@@ -49,7 +49,7 @@ const nav = ['Models', 'Datasets', 'Spaces', 'Papers'] as const;
               <div class="truncate font-mono text-[10px] text-paper">
                 {row.name}
               </div>
-              <div class="mt-0.5 font-mono text-[9px] text-fog/60">
+              <div class="mt-0.5 font-mono text-[9px] text-fog">
                 {row.meta}
               </div>
             </li>

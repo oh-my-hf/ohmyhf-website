@@ -80,14 +80,14 @@ const platforms = [
       {
         platforms.map((p) => (
           <li
-            class="rounded-sm border border-line bg-panel p-5 transition-[border-color,opacity] data-[active=true]:border-iris data-[demoted=true]:opacity-55"
+            class="rounded-sm border border-line bg-panel p-5 transition-[border-color,background-color] data-[active=true]:border-iris data-[demoted=true]:border-line/80 data-[demoted=true]:bg-ink/40"
             data-platform={p.platform}
             data-download-platform
           >
             <p class="font-mono text-xs tracking-wider text-fog uppercase">
               {p.label}
             </p>
-            <p class="mt-1 font-mono text-[11px] text-fog/70">{p.format}</p>
+            <p class="mt-1 font-mono text-[11px] text-fog">{p.format}</p>
 
             {released ? (
               <div class="mt-5 flex flex-col gap-2">
@@ -119,7 +119,7 @@ const platforms = [
                 </span>
                 {'secondaryHref' in p && p.secondaryHref ? (
                   <span
-                    class="inline-flex cursor-not-allowed items-center justify-center rounded-sm border border-line/60 px-4 py-2 font-mono text-xs text-fog/60"
+                    class="inline-flex cursor-not-allowed items-center justify-center rounded-sm border border-line/60 px-4 py-2 font-mono text-xs text-fog"
                     aria-disabled="true"
                     role="link"
                   >
@@ -137,7 +137,7 @@ const platforms = [
       {t('download.unsignedPrefix')}{' '}
       <a
         href={unsignedHref}
-        class="text-iris underline-offset-2 transition-colors hover:underline"
+        class="text-iris underline underline-offset-2 transition-colors hover:text-paper"
         target="_blank"
         rel="noopener noreferrer"
       >

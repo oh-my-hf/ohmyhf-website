@@ -73,8 +73,7 @@ const navItems = [
 
       <a
         href={altHref}
-        class="rounded-sm px-2 py-1 font-mono text-xs text-fog transition-colors hover:bg-panel hover:text-paper"
-        aria-label={t('nav.language')}
+        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm px-2 py-1 font-mono text-xs text-fog transition-colors hover:bg-panel hover:text-paper"
         data-lang-switch
       >
         {switchLabel}
@@ -82,7 +81,7 @@ const navItems = [
 
       <button
         type="button"
-        class="inline-flex items-center justify-center rounded-sm p-2 text-fog transition-colors hover:bg-panel hover:text-paper md:hidden"
+        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm p-2 text-fog transition-colors hover:bg-panel hover:text-paper md:hidden"
         aria-expanded="false"
         aria-controls="mobile-nav"
         data-menu-toggle

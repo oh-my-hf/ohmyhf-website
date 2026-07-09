@@ -9,18 +9,25 @@ import Trust from './Trust.astro';
 import Download from './Download.astro';
 import FAQ from './FAQ.astro';
 import Footer from './Footer.astro';
-import type { Locale } from '../i18n';
+import { useTranslations, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
+const t = useTranslations(locale);
 ---
 
 <BaseLayout locale={locale}>
+  <a
+    href="#main-content"
+    class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-sm focus:bg-iris focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-ink focus:outline-none"
+  >
+    {t('nav.skipToContent')}
+  </a>
   <Header locale={locale} />
-  <main>
+  <main id="main-content" tabindex="-1">
     <Hero locale={locale} />
     <PainPoint locale={locale} />
     <Features locale={locale} />
