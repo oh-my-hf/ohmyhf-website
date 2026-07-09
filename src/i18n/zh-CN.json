@@ -12,6 +12,8 @@
     "closeMenu": "关闭菜单",
     "switchToZh": "中文",
     "switchToEn": "English",
+    "themeToLight": "切换到浅色主题",
+    "themeToDark": "切换到深色主题",
     "language": "语言",
     "primary": "主导航",
     "mobile": "移动导航",

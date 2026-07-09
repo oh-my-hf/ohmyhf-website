@@ -12,6 +12,8 @@
     "closeMenu": "Close menu",
     "switchToZh": "中文",
     "switchToEn": "English",
+    "themeToLight": "Switch to light theme",
+    "themeToDark": "Switch to dark theme",
     "language": "Language",
     "primary": "Primary",
     "mobile": "Mobile",

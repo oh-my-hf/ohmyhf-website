@@ -78,6 +78,37 @@
     'Liberation Mono', 'Courier New', monospace;
 }
 
+/* Light ("day") theme. Dark is the default palette in @theme above; an inline
+   pre-paint script in BaseLayout sets data-theme from localStorage or the
+   system preference. Values are WCAG AA-checked against ink/panel. */
+:root {
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-ink: #f3f5f9;
+  --color-panel: #ffffff;
+  --color-line: #d7dde7;
+  --color-fog: #4d5c6f;
+  --color-paper: #141a26;
+  --color-iris: #4353d0;
+  --color-jade: #0a7355;
+}
+
+/* App-window mockups depict the app's own dark UI — pin them to the dark
+   palette so they read as screenshots in either theme. */
+.theme-dark {
+  color-scheme: dark;
+  --color-ink: #0a0d13;
+  --color-panel: #131822;
+  --color-line: #242c3a;
+  --color-fog: #9aa7ba;
+  --color-paper: #e8edf4;
+  --color-iris: #8a97ff;
+  --color-jade: #4ad6a6;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
