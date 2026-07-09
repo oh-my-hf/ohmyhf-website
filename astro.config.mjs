@@ -6,9 +6,9 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  site: 'https://ohmyhf.app',
-  // Temporary GitHub Pages project-site prefix until ohmyhf.app goes live
-  // (set in CI; remove BASE_PATH from the workflow once the custom domain is configured).
+  site: 'https://ohmyhf.com',
+  // Optional path prefix for previews served under a subpath; the production
+  // deploy on the ohmyhf.com custom domain serves from the root.
   base: process.env.BASE_PATH || '/',
   integrations: [sitemap()],
   vite: {

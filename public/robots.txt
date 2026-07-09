@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ohmyhf.app/sitemap-index.xml
+Sitemap: https://ohmyhf.com/sitemap-index.xml
