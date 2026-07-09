@@ -60,7 +60,25 @@ Output is written to `dist/` and can be served by any static host.
 
 ## Placeholder media
 
-Product screenshots and recordings are not available yet. UI is implemented as HTML/CSS mockups that can be swapped for real assets later. See [`docs/media-replacement.md`](docs/media-replacement.md) for the inventory and replacement steps.
+Product screenshots and recordings are not available yet. UI is implemented as HTML/CSS mockups that can be swapped for real assets later. See [`docs/media-replacement.md`](docs/media-replacement.md) for the inventory and replacement steps (5 mockups + `og.png`).
+
+## QA results (2026-07-09)
+
+Lighthouse mobile (default emulation) against the production `dist/` build:
+
+| Locale | Performance | Accessibility | Best Practices | SEO |
+| ------ | ----------- | ------------- | -------------- | --- |
+| `/` (en) | 97 | 100 | 100 | 100 |
+| `/zh/` | 95 | 100 | 100 | 100 |
+
+Baseline before QA fixes (same setup): Performance 98, Accessibility **92**, Best Practices 100, SEO 100 on both locales. Accessibility was raised by fixing fog opacity contrast, always-underlining in-text links, and removing demoted-card `opacity` that failed WCAG AA.
+
+Also verified:
+
+- **Responsive:** screenshots at 390 / 768 / 1024 / 1440; no horizontal overflow at 390 (`scrollWidth <= innerWidth`) for en and zh; hero window mockup degrades cleanly on mobile (sidebar icons + list, preview pane hidden until `lg`).
+- **Keyboard / a11y:** skip-to-content link, `:focus-visible` iris outline, mobile menu `aria-expanded`, native `<details>`/`<summary>` FAQ, no positive `tabindex`, tap targets ≥44px on menu/lang controls.
+- **`prefers-reduced-motion`:** hero/feature motion gated under `no-preference`; global reduce rule collapses remaining transitions/animations.
+- **Hard requirements:** “unofficial” / “非官方” in hero + footer; full trademark disclaimer; no 🤗 / HF yellow accents; exactly two runtime scripts; no analytics/cookies; `lang` / hreflang / canonical / JSON-LD SoftwareApplication; sitemap + robots in `dist/`; Apache-2.0 LICENSE.
 
 ## License
 
