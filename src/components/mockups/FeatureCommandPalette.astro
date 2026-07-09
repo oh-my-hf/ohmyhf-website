@@ -1,0 +1,99 @@
+---
+const chips = [
+    'task:text-generation',
+    'library:gguf',
+    'license:apache-2.0',
+  ] as const;
+
+  const results = [
+    {
+      name: 'meta-llama/Llama-3.1-8B',
+      sort: 'trending',
+      meta: '8B · GGUF',
+    },
+    {
+      name: 'Qwen/Qwen2.5-7B-Instruct-GGUF',
+      sort: 'downloads',
+      meta: '7B · GGUF',
+    },
+    {
+      name: 'mistralai/Mistral-7B-Instruct-v0.3',
+      sort: 'likes',
+      meta: '7B · GGUF',
+    },
+    {
+      name: 'google/gemma-2-9b-it',
+      sort: 'trending',
+      meta: '9B · GGUF',
+    },
+  ] as const;
+---
+<!-- PLACEHOLDER: replace with real screenshot feature-command-palette.png (recommended 2560×1600 @2x) when available -->
+
+<div
+  class="feature-reveal relative w-full overflow-hidden rounded-lg border border-line bg-panel shadow-[0_16px_48px_-16px_rgba(0,0,0,0.55)]"
+  style="aspect-ratio: 16 / 11;"
+  aria-hidden="true"
+>
+  <div class="absolute inset-0 bg-ink/50"></div>
+  <div
+    class="absolute inset-x-4 top-[12%] mx-auto max-w-md overflow-hidden rounded-md border border-line bg-panel shadow-lg sm:inset-x-8"
+  >
+    <div
+      class="flex items-center gap-2 border-b border-line px-3 py-2.5"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        class="h-3.5 w-3.5 shrink-0 text-fog"
+      >
+        <circle cx="11" cy="11" r="7"></circle>
+        <path stroke-linecap="round" d="M20 20l-3-3"></path>
+      </svg>
+      <span class="flex-1 truncate font-mono text-xs text-paper">
+        llama 8b gguf
+      </span>
+      <kbd
+        class="shrink-0 rounded-sm border border-line bg-ink/60 px-1.5 py-0.5 font-mono text-[9px] text-fog"
+      >
+        ⌘K
+      </kbd>
+    </div>
+    <div class="flex flex-wrap gap-1.5 border-b border-line px-3 py-2">
+      {
+        chips.map((chip) => (
+          <span class="rounded-sm bg-iris/15 px-1.5 py-0.5 font-mono text-[9px] text-iris">
+            {chip}
+          </span>
+        ))
+      }
+    </div>
+    <ul>
+      {
+        results.map((row, i) => (
+          <li
+            class:list={[
+              'flex items-center justify-between gap-2 border-b border-line/50 px-3 py-2 last:border-b-0',
+              i === 0 ? 'bg-iris/10' : '',
+            ]}
+          >
+            <div class="min-w-0">
+              <div class="truncate font-mono text-[10px] text-paper">
+                {row.name}
+              </div>
+              <div class="mt-0.5 font-mono text-[9px] text-fog/60">
+                {row.meta}
+              </div>
+            </div>
+            <span class="shrink-0 rounded-sm bg-line/80 px-1.5 py-0.5 font-mono text-[8px] uppercase tracking-wide text-fog">
+              {row.sort}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+---
+const nav = ['Models', 'Datasets', 'Spaces', 'Papers'] as const;
+  const rows = [
+    { name: 'meta-llama/Llama-3.1-8B', meta: '8B · 2.1M dl', active: true },
+    { name: 'Qwen/Qwen2.5-7B-Instruct', meta: '7B · 1.4M dl', active: false },
+    { name: 'mistralai/Mistral-7B-v0.3', meta: '7B · 980k dl', active: false },
+    { name: 'deepseek-ai/DeepSeek-R1', meta: '671B · 1.8M dl', active: false },
+    { name: 'google/gemma-2-9b', meta: '9B · 720k dl', active: false },
+  ] as const;
+---
+<!-- PLACEHOLDER: replace with real screenshot feature-browse.png (recommended 2560×1600 @2x) when available -->
+
+<div
+  class="feature-reveal w-full overflow-hidden rounded-lg border border-line bg-panel shadow-[0_16px_48px_-16px_rgba(0,0,0,0.55)]"
+  style="aspect-ratio: 16 / 11;"
+  aria-hidden="true"
+>
+  <div class="flex h-8 items-center gap-1.5 border-b border-line px-3">
+    <span class="h-2 w-2 rounded-full bg-[#FF5F57]"></span>
+    <span class="h-2 w-2 rounded-full bg-[#FEBC2E]"></span>
+    <span class="h-2 w-2 rounded-full bg-[#28C840]"></span>
+    <span class="ml-2 font-mono text-[10px] text-fog/70">Browse</span>
+  </div>
+  <div class="grid h-[calc(100%-2rem)] grid-cols-[4.5rem_1fr] sm:grid-cols-[7rem_minmax(0,1.2fr)_minmax(0,0.9fr)]">
+    <aside class="flex flex-col gap-0.5 border-r border-line bg-ink/40 p-1.5">
+      {
+        nav.map((label, i) => (
+          <div
+            class:list={[
+              'rounded-sm px-1.5 py-1.5 font-mono text-[9px] sm:text-[10px]',
+              i === 0 ? 'bg-iris/15 text-paper' : 'text-fog/70',
+            ]}
+          >
+            {label}
+          </div>
+        ))
+      }
+    </aside>
+    <div class="relative min-w-0 overflow-hidden border-r border-line">
+      <ul class="absolute inset-0 overflow-hidden">
+        {
+          rows.map((row) => (
+            <li
+              class:list={[
+                'border-b border-line/50 px-2.5 py-2',
+                row.active ? 'bg-iris/10' : '',
+              ]}
+            >
+              <div class="truncate font-mono text-[10px] text-paper">
+                {row.name}
+              </div>
+              <div class="mt-0.5 font-mono text-[9px] text-fog/60">
+                {row.meta}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+      <div
+        class="pointer-events-none absolute right-1 top-2 bottom-2 w-1 rounded-full bg-line"
+      >
+        <div
+          class="absolute top-[18%] h-[28%] w-full rounded-full bg-fog/40"
+        >
+        </div>
+      </div>
+    </div>
+    <div class="hidden min-w-0 overflow-hidden p-2.5 sm:block">
+      <div class="font-mono text-[10px] font-medium text-paper">
+        Llama 3.1 8B
+      </div>
+      <p class="mt-1.5 text-[9px] leading-relaxed text-fog">
+        Instruction-tuned generative model. Instant preview — no page reload.
+      </p>
+      <div
+        class="mt-2 rounded-sm border border-line bg-ink/50 p-2 font-mono text-[9px] text-[#7BA3C9]"
+      >
+        config.json · model.safetensors · …
+      </div>
+    </div>
+  </div>
+</div>
