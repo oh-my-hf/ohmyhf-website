@@ -32,7 +32,7 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <image href="data:image/png;base64,${iconB64}" x="96" y="120" width="96" height="96"/>
   <text x="96" y="300" font-family="'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="88" font-weight="700" fill="#101828" letter-spacing="-1.5">ohmyhf</text>
   <text x="96" y="368" font-family="'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#4b5563">The Hugging Face desktop client that should have existed.</text>
-  <text x="96" y="520" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="500" fill="#6a7282" letter-spacing="1">unofficial · open source · v0.0.2</text>
+  <text x="96" y="520" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="500" fill="#6a7282" letter-spacing="1">unofficial · open source · v0.0.4</text>
 </svg>`;
 
 const png = await sharp(Buffer.from(svg)).png().toBuffer();
