@@ -5,9 +5,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 gsap.defaults({ ease: 'power3.out', duration: 0.7 });
 
+/** Every element the choreography may hide; the failsafe restores this set. */
+const REVEAL_SELECTOR = [
+  '[data-hero-brand]',
+  '[data-hero-title]',
+  '[data-hero-sub]',
+  '[data-hero-cta]',
+  '[data-hero-meta]',
+  '[data-hero-shot]',
+  '[data-pain-line]',
+  '[data-pain-fix]',
+  '[data-feature-copy]',
+  '[data-feature-shot]',
+  '[data-roadmap-card]',
+  '[data-download-platform]',
+  '[data-section-head]',
+].join(', ');
+
 /**
  * Landing-page motion: one hero timeline + purposeful scroll reveals.
- * Respects prefers-reduced-motion via gsap.matchMedia().
+ * Content is visible in markup; GSAP re-hides it only while a visible tab
+ * is animating, so preview bots, background tabs, and failed scripts still
+ * get the full page. Respects prefers-reduced-motion via gsap.matchMedia().
  */
 export function initMotion(root: ParentNode = document): void {
   const mm = gsap.matchMedia();
@@ -23,15 +42,23 @@ export function initMotion(root: ParentNode = document): void {
         reduceMotion: boolean;
       };
 
-      if (reduceMotion) {
-        gsap.set(
-          root.querySelectorAll(
-            '[data-hero-brand], [data-hero-title], [data-hero-sub], [data-hero-cta], [data-hero-meta], [data-hero-shot], [data-pain], [data-feature-copy], [data-feature-shot], [data-roadmap-card], [data-download-platform], [data-section-head]',
-          ),
-          { clearProps: 'all' },
-        );
+      // Entrances re-hide content before playing, so skip them whenever the
+      // page can't (hidden tab) or shouldn't (reduced motion, late script
+      // execution on a page the visitor is already reading) animate.
+      if (
+        reduceMotion ||
+        document.visibilityState !== 'visible' ||
+        performance.now() > 2000
+      ) {
+        // Clear only what the choreography touches; 'all' would also wipe
+        // author inline styles (e.g. the hero's letter-spacing).
+        gsap.set(root.querySelectorAll(REVEAL_SELECTOR), {
+          clearProps: 'visibility,opacity,transform',
+        });
         return;
       }
+
+      let heroTl: gsap.core.Timeline | null = null;
 
       const hero = root.querySelector<HTMLElement>('[data-hero]');
       if (hero) {
@@ -54,17 +81,14 @@ export function initMotion(root: ParentNode = document): void {
         tl.to(brand, { autoAlpha: 1, y: 0, scale: 1, duration: 0.55 }, 0.05)
           .to(title, { autoAlpha: 1, y: 0, duration: 0.7 }, '-=0.25')
           .to(sub, { autoAlpha: 1, y: 0, duration: 0.55 }, '-=0.4')
-          .to(
-            ctas,
-            { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.08 },
-            '-=0.3',
-          )
+          .to(ctas, { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.08 }, '-=0.3')
           .to(meta, { autoAlpha: 1, y: 0, duration: 0.4 }, '-=0.25')
           .to(
             shot,
             { autoAlpha: 1, y: 0, scale: 1, duration: 0.85, ease: 'power2.out' },
             '-=0.2',
           );
+        heroTl = tl;
 
         if (shot) {
           gsap.to(shot, {
@@ -193,6 +217,15 @@ export function initMotion(root: ParentNode = document): void {
         }
       }
 
+      // Failsafe: if the ticker never advances the hero timeline (window
+      // occluded right after load, rAF stalled), revert the whole
+      // choreography rather than leave the page hidden.
+      const failsafe = window.setTimeout(() => {
+        if (heroTl && heroTl.progress() === 0) {
+          mm.revert();
+        }
+      }, 1200);
+
       const refresh = () => ScrollTrigger.refresh();
       root.querySelectorAll('img').forEach((img) => {
         if (!img.complete) {
@@ -202,6 +235,7 @@ export function initMotion(root: ParentNode = document): void {
       window.addEventListener('load', refresh, { once: true });
 
       return () => {
+        window.clearTimeout(failsafe);
         window.removeEventListener('load', refresh);
       };
     },

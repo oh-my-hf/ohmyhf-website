@@ -47,31 +47,26 @@
   "features": {
     "region": "功能",
     "browse": {
-      "eyebrow": "浏览",
       "title": "三栏极速浏览，零刷新切换。",
       "description": "侧边栏、列表与实时预览固定布局，在 Models、Datasets、Spaces、Papers 之间切换。点选仓库后，右栏即时渲染 model card —— 无需新标签、无需整页重载。",
       "shotAlt": "三栏浏览界面：模型列表与实时 README 卡片"
     },
     "filter": {
-      "eyebrow": "筛选",
       "title": "把 Hub 筛到只剩你要的那一列。",
       "description": "在模型列表旁打开筛选：task、参数量、library、license。一键清空或点 Done，继续在同一套三栏里浏览。想搜全局时，随时 ⌘K。",
       "shotAlt": "含 task、参数量、library、license 的筛选面板"
     },
     "files": {
-      "eyebrow": "文件",
       "title": "打开文件树，就地预览配置。",
       "description": "在任意仓库切到 Files：浏览目录、选中权重或 config.json，在侧栏预览内容 —— 不用再开浏览器标签。",
       "shotAlt": "Files 标签：仓库文件树与 config.json 预览"
     },
     "home": {
-      "eyebrow": "主页",
       "title": "主页动态，侧边 Trending。",
       "description": "关注用户与组织，中间刷动态，右侧盯着 Trending 的 models / datasets / spaces。收藏、下载、缓存等 Library 入口都在同一侧栏。",
       "shotAlt": "主页动态与 Trending 侧栏"
     },
     "spaces": {
-      "eyebrow": "Spaces",
       "title": "Spaces 是画廊，不是一堆标签页。",
       "description": "以卡片网格浏览运行中的 Spaces，看状态与 likes，选中后再打开详情。节奏与 Models 一样：三栏，点选即预览。",
       "shotAlt": "Spaces 画廊：彩色 Space 卡片网格"
@@ -79,8 +74,7 @@
   },
   "comingSoon": {
     "region": "即将推出",
-    "eyebrow": "路线图",
-    "title": "即将到来。",
+    "title": "路线图上，即将到来。",
     "badge": "进行中",
     "inbox": {
       "title": "更强的收件箱",
@@ -97,7 +91,6 @@
   },
   "trust": {
     "region": "信任",
-    "eyebrow": "原则",
     "title": "值得信赖的设计。",
     "openSource": {
       "title": "开源",
@@ -114,9 +107,10 @@
   },
   "download": {
     "region": "下载",
-    "eyebrow": "获取应用",
     "title": "下载 ohmyhf",
-    "versionLine": "最新版本：v{version}。安装包来自 GitHub Releases。",
+    "versionLinePrefix": "最新版本：v{version}。安装包与校验和都来自",
+    "releasesLink": "GitHub Releases",
+    "versionLineSuffix": "页面。",
     "notice": "首个正式版即将发布 —— 关注仓库即可收到通知。",
     "watchCta": "在 GitHub 上关注",
     "get": "下载",
@@ -124,16 +118,16 @@
     "macos": "macOS",
     "macosFormat": "dmg（Apple Silicon）",
     "windows": "Windows",
-    "windowsFormat": "nsis",
+    "windowsFormat": "exe 安装包",
     "linux": "Linux",
-    "linuxAppImage": "AppImage",
+    "linuxFormat": "AppImage / deb（x64）",
     "linuxDeb": "deb",
     "unsignedNote": "签名说明",
-    "unsignedPrefix": "目前 macOS 构建尚未签名 —— 详见"
+    "unsignedPrefix": "构建暂未签名 —— 详见",
+    "unsignedSuffix": "。"
   },
   "faq": {
     "region": "常见问题",
-    "eyebrow": "常见问题",
     "title": "常见问题解答。",
     "items": {
       "official": {
@@ -150,7 +144,7 @@
       },
       "platforms": {
         "q": "支持哪些平台？",
-        "a": "ohmyhf 面向 macOS、Windows 与 Linux。发布形态包括 dmg、NSIS 安装包以及 AppImage / deb；并通过 GitHub Releases 提供应用内更新。"
+        "a": "ohmyhf 面向 macOS、Windows 与 Linux。发布形态包括 dmg、exe 安装包以及 AppImage / deb；并通过 GitHub Releases 提供应用内更新。"
       },
       "cache": {
         "q": "与 huggingface-cli / transformers 的缓存兼容吗？",

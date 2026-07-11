@@ -1,5 +1,5 @@
 ---
-import { DOWNLOAD_URLS, REPO_URL, released, version } from '../config';
+import { DOWNLOAD_URLS, RELEASES_URL, REPO_URL, released, version } from '../config';
 import { useTranslations, type Locale } from '../i18n';
 
 interface Props {
@@ -30,7 +30,7 @@ const platforms = [
   {
     id: 'linux',
     label: t('download.linux'),
-    format: `${t('download.linuxAppImage')} / ${t('download.linuxDeb')}`,
+    format: t('download.linuxFormat'),
     href: DOWNLOAD_URLS.linuxAppImage,
     platform: 'linux',
     secondaryHref: DOWNLOAD_URLS.linuxDeb,
@@ -42,26 +42,32 @@ const platforms = [
 <section
   id="download"
   data-download
-  class="border-b border-line px-4 py-20 sm:px-6 sm:py-28"
+  class="border-line border-b px-4 py-20 sm:px-6 sm:py-28"
   aria-label={t('download.region')}
 >
   <div class="mx-auto max-w-6xl">
     <header data-section-head class="max-w-xl will-change-transform">
-      <p class="font-mono text-xs font-medium tracking-wide text-faint uppercase">
-        {t('download.eyebrow')}
-      </p>
       <h2
-        class="mt-3 font-display text-2xl font-semibold tracking-tight text-paper sm:text-3xl"
+        class="font-display text-paper text-2xl font-semibold tracking-tight sm:text-3xl"
       >
         {t('download.title')}
       </h2>
       {
         released ? (
-          <p class="mt-4 text-sm leading-relaxed text-body">
-            {t('download.versionLine').replace('{version}', version)}
+          <p class="text-body mt-4 text-sm leading-relaxed">
+            {t('download.versionLinePrefix').replace('{version}', version)}{' '}
+            <a
+              href={RELEASES_URL}
+              class="text-paper hover:text-iris underline underline-offset-2 transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('download.releasesLink')}
+            </a>{' '}
+            {t('download.versionLineSuffix')}
           </p>
         ) : (
-          <p class="mt-4 text-sm leading-relaxed text-body">{t('download.notice')}</p>
+          <p class="text-body mt-4 text-sm leading-relaxed">{t('download.notice')}</p>
         )
       }
     </header>
@@ -85,33 +91,47 @@ const platforms = [
       {
         platforms.map((p) => (
           <li
-            class="rounded-lg border border-line bg-panel p-5 will-change-transform transition-[border-color,background-color] data-[active=true]:border-iris/40 data-[active=true]:bg-ink data-[demoted=true]:opacity-80"
+            class="border-line bg-panel data-[active=true]:border-iris/40 data-[active=true]:bg-ink rounded-lg border p-5 transition-[border-color,background-color] will-change-transform"
             data-platform={p.platform}
             data-download-platform
           >
-            <p class="font-mono text-xs font-medium tracking-wide text-faint uppercase">
+            <h3 class="font-display text-paper text-lg font-semibold tracking-tight">
               {p.label}
-            </p>
-            <p class="mt-1 font-mono text-[11px] text-faint">{p.format}</p>
+            </h3>
+            <p class="text-faint mt-1 font-mono text-[11px]">{p.format}</p>
 
             {released ? (
               <div class="mt-5 flex flex-col gap-2">
-                <a href={p.href} class="btn-primary" data-download-primary>
+                <a href={p.href} class="download-cta" data-download-primary>
                   {t('download.get')} {p.label}
                 </a>
                 {'secondaryHref' in p && p.secondaryHref ? (
                   <a
                     href={p.secondaryHref}
-                    class="inline-flex items-center justify-center rounded-full border border-line px-4 py-2 font-mono text-xs text-fog transition-colors hover:border-paper/20 hover:text-paper"
+                    class="border-line text-fog hover:border-paper/20 hover:text-paper inline-flex items-center justify-center rounded-full border px-4 py-2 font-mono text-xs transition-colors"
                   >
                     {p.secondaryLabel}
                   </a>
+                ) : null}
+                {p.id === 'macos' ? (
+                  <p class="text-fog mt-1 text-xs leading-relaxed">
+                    {t('download.unsignedPrefix')}
+                    <a
+                      href={unsignedHref}
+                      class="text-body hover:text-iris underline underline-offset-2 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {t('download.unsignedNote')}
+                    </a>
+                    {t('download.unsignedSuffix')}
+                  </p>
                 ) : null}
               </div>
             ) : (
               <div class="mt-5 flex flex-col gap-2">
                 <span
-                  class="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-line bg-panel-2 px-4 py-2 text-sm font-medium text-faint"
+                  class="border-line bg-panel-2 text-faint inline-flex cursor-not-allowed items-center justify-center rounded-full border px-4 py-2 text-sm font-medium"
                   aria-disabled="true"
                   role="link"
                   data-download-primary
@@ -120,7 +140,7 @@ const platforms = [
                 </span>
                 {'secondaryHref' in p && p.secondaryHref ? (
                   <span
-                    class="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-line/60 px-4 py-2 font-mono text-xs text-faint"
+                    class="border-line/60 text-faint inline-flex cursor-not-allowed items-center justify-center rounded-full border px-4 py-2 font-mono text-xs"
                     aria-disabled="true"
                     role="link"
                   >
@@ -133,19 +153,6 @@ const platforms = [
         ))
       }
     </ul>
-
-    <p class="mt-8 text-sm text-body">
-      {t('download.unsignedPrefix')}{' '}
-      <a
-        href={unsignedHref}
-        class="text-paper underline underline-offset-2 transition-colors hover:text-iris"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {t('download.unsignedNote')}
-      </a>
-      .
-    </p>
   </div>
 </section>
 
@@ -188,9 +195,7 @@ const platforms = [
   const detected = detectPlatform();
   if (detected !== 'unknown') {
     document.querySelectorAll<HTMLElement>('[data-download-platform]').forEach((el) => {
-      const match = el.dataset.platform === detected;
-      el.dataset.active = match ? 'true' : 'false';
-      el.dataset.demoted = match ? 'false' : 'true';
+      el.dataset.active = el.dataset.platform === detected ? 'true' : 'false';
     });
   }
 </script>

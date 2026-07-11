@@ -47,31 +47,26 @@
   "features": {
     "region": "Features",
     "browse": {
-      "eyebrow": "Browse",
       "title": "Triple-pane browsing. Zero reloads.",
       "description": "Sidebar, list, and live preview stay put while you switch Models, Datasets, Spaces, and Papers. Pick a repo and the right pane renders the model card instantly — no new tabs, no full-page reloads.",
       "shotAlt": "Three-pane browse UI with a model list and live README card"
     },
     "filter": {
-      "eyebrow": "Filter",
       "title": "Narrow the Hub until one list remains.",
       "description": "Open filters beside the model list: task, parameter size, library, and license. Clear all or hit Done — then keep browsing the same three panes. ⌘K is always there when you want to search everything.",
       "shotAlt": "Filter panel with task, parameter, library, and license chips"
     },
     "files": {
-      "eyebrow": "Files",
       "title": "Open the file tree. Preview configs in place.",
       "description": "Switch to Files on any repo: walk folders, select a weight or config.json, and read it in the side preview — without leaving the desktop window or dumping another browser tab.",
       "shotAlt": "Files tab showing a repo tree and config.json preview"
     },
     "home": {
-      "eyebrow": "Home",
       "title": "A home feed — and trending on the side.",
       "description": "Follow people and orgs, skim posts in the center, and keep an eye on trending models, datasets, and spaces in the right rail. Library items like favorites, downloads, and cache live in the same sidebar.",
       "shotAlt": "Home feed with posts and a trending sidebar"
     },
     "spaces": {
-      "eyebrow": "Spaces",
       "title": "Spaces as a gallery, not a pile of tabs.",
       "description": "Browse running Spaces in a card grid with status and likes, then open one when you’re ready. The detail pane waits until you pick — same three-pane rhythm as Models.",
       "shotAlt": "Spaces gallery with colorful Space cards"
@@ -79,8 +74,7 @@
   },
   "comingSoon": {
     "region": "Coming soon",
-    "eyebrow": "Roadmap",
-    "title": "On the way.",
+    "title": "On the roadmap.",
     "badge": "In progress",
     "inbox": {
       "title": "Deeper inbox",
@@ -97,7 +91,6 @@
   },
   "trust": {
     "region": "Trust",
-    "eyebrow": "Principles",
     "title": "Built to earn trust.",
     "openSource": {
       "title": "Open source",
@@ -114,26 +107,27 @@
   },
   "download": {
     "region": "Download",
-    "eyebrow": "Get the app",
     "title": "Download ohmyhf",
-    "versionLine": "Latest release: v{version}. Installers are pulled from GitHub Releases.",
+    "versionLinePrefix": "Latest release: v{version}. Installers and checksums come from the",
+    "releasesLink": "GitHub Releases",
+    "versionLineSuffix": "page.",
     "notice": "First release is on its way — watch the repo to get notified.",
     "watchCta": "Watch on GitHub",
-    "get": "Get",
+    "get": "Download for",
     "comingSoon": "Coming soon",
     "macos": "macOS",
     "macosFormat": "dmg (Apple Silicon)",
     "windows": "Windows",
-    "windowsFormat": "nsis",
+    "windowsFormat": "exe installer",
     "linux": "Linux",
-    "linuxAppImage": "AppImage",
+    "linuxFormat": "AppImage / deb (x64)",
     "linuxDeb": "deb",
     "unsignedNote": "signing notes",
-    "unsignedPrefix": "macOS builds are unsigned for now — see the"
+    "unsignedPrefix": "Unsigned build for now — see the ",
+    "unsignedSuffix": "."
   },
   "faq": {
     "region": "FAQ",
-    "eyebrow": "FAQ",
     "title": "Questions, answered.",
     "items": {
       "official": {
@@ -150,7 +144,7 @@
       },
       "platforms": {
         "q": "Which platforms are supported?",
-        "a": "ohmyhf targets macOS, Windows, and Linux. Builds ship as dmg, NSIS installer, and AppImage / deb, with in-app updates from GitHub Releases."
+        "a": "ohmyhf targets macOS, Windows, and Linux. Builds ship as dmg, exe installer, and AppImage / deb, with in-app updates from GitHub Releases."
       },
       "cache": {
         "q": "Is the cache compatible with huggingface-cli and transformers?",

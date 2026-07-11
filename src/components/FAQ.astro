@@ -47,43 +47,40 @@ const items = [
 
 <section
   id="faq"
-  class="border-b border-line px-4 py-20 sm:px-6 sm:py-28"
+  class="border-line border-b px-4 py-20 sm:px-6 sm:py-28"
   aria-label={t('faq.region')}
 >
   <div class="mx-auto max-w-6xl">
     <header class="max-w-xl">
-      <p class="font-mono text-xs font-medium tracking-wide text-faint uppercase">
-        {t('faq.eyebrow')}
-      </p>
       <h2
-        class="mt-3 font-display text-2xl font-semibold tracking-tight text-paper sm:text-3xl"
+        class="font-display text-paper text-2xl font-semibold tracking-tight sm:text-3xl"
       >
         {t('faq.title')}
       </h2>
     </header>
 
-    <div class="mt-12 divide-y divide-line border-y border-line">
+    <div class="divide-line border-line mt-12 divide-y border-y">
       {
         items.map((item) => (
           <details class="group py-1">
-            <summary class="cursor-pointer list-none py-4 pr-8 text-base font-medium text-paper transition-colors marker:content-none hover:text-iris [&::-webkit-details-marker]:hidden">
+            <summary class="text-paper hover:text-iris cursor-pointer list-none py-4 pr-8 text-base font-medium transition-colors marker:content-none [&::-webkit-details-marker]:hidden">
               <span class="flex items-start justify-between gap-4">
                 <span>{item.q}</span>
                 <span
-                  class="mt-1 shrink-0 font-mono text-xs text-faint transition-transform group-open:rotate-45"
+                  class="text-faint mt-1 shrink-0 font-mono text-xs transition-transform group-open:rotate-45"
                   aria-hidden="true"
                 >
                   +
                 </span>
               </span>
             </summary>
-            <div class="pb-5 text-sm leading-relaxed text-body">
+            <div class="text-body max-w-[70ch] pb-5 text-sm leading-relaxed">
               <p>{item.a}</p>
               {item.link ? (
                 <p class="mt-3">
                   <a
                     href={item.link}
-                    class="text-paper underline underline-offset-2 transition-colors hover:text-iris"
+                    class="text-paper hover:text-iris underline underline-offset-2 transition-colors"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

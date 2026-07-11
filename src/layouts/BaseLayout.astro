@@ -53,14 +53,7 @@ const jsonLd = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#ffffff" />
-    {
-      noIndex ? (
-        <meta name="robots" content="noindex, follow" />
-      ) : null
-    }
-    <script is:inline>
-      document.documentElement.classList.add('js');
-    </script>
+    {noIndex ? <meta name="robots" content="noindex, follow" /> : null}
     <script is:inline>
       (() => {
         let theme;
@@ -86,16 +79,8 @@ const jsonLd = {
         <>
           <link rel="canonical" href={canonicalURL.href} />
           <link rel="alternate" hreflang="en" href={new URL('/', site).href} />
-          <link
-            rel="alternate"
-            hreflang="zh-CN"
-            href={new URL('/zh/', site).href}
-          />
-          <link
-            rel="alternate"
-            hreflang="x-default"
-            href={new URL('/', site).href}
-          />
+          <link rel="alternate" hreflang="zh-CN" href={new URL('/zh/', site).href} />
+          <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
         </>
       )
     }
@@ -121,7 +106,7 @@ const jsonLd = {
       )
     }
   </head>
-  <body class="min-h-screen bg-ink text-body">
+  <body class="bg-ink text-body min-h-screen">
     <slot />
   </body>
 </html>

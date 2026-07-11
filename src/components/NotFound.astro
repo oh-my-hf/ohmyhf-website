@@ -1,12 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { REPO_URL } from '../config';
-import {
-  alternateLocale,
-  localeHref,
-  useTranslations,
-  type Locale,
-} from '../i18n';
+import { alternateLocale, localeHref, useTranslations, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
@@ -28,24 +23,17 @@ const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
   noIndex
   skipJsonLd
 >
-  <div
-    data-not-found
-    class="relative flex min-h-screen flex-col overflow-hidden"
-  >
-    <div
-      class="pointer-events-none absolute inset-0 site-wash"
-      aria-hidden="true"
-    >
-    </div>
+  <div data-not-found class="relative flex min-h-screen flex-col overflow-hidden">
+    <div class="site-wash pointer-events-none absolute inset-0" aria-hidden="true"></div>
 
-    <header class="site-header relative z-10 border-b border-line/80 backdrop-blur-md">
+    <header class="site-header border-line/80 relative z-10 border-b backdrop-blur-md">
       <div
         class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6"
       >
         <a
           data-nf-home-link
           href={homeHref}
-          class="flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight text-paper transition-colors hover:text-iris"
+          class="font-display text-paper hover:text-iris flex items-center gap-2.5 text-lg font-semibold tracking-tight transition-colors"
         >
           <img
             src={`${base}/favicon.png`}
@@ -60,13 +48,13 @@ const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
           <a
             data-nf-lang
             href={altHref}
-            class="inline-flex min-h-11 items-center rounded-lg px-2 font-mono text-xs text-fog transition-colors hover:bg-panel-2 hover:text-paper"
+            class="text-fog hover:bg-panel-2 hover:text-paper inline-flex min-h-11 items-center rounded-lg px-2 font-mono text-xs transition-colors"
           >
             {switchLabel}
           </a>
           <a
             href={REPO_URL}
-            class="hidden text-fog transition-colors hover:text-paper sm:inline-flex"
+            class="text-fog hover:text-paper hidden transition-colors sm:inline-flex"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t('notFound.github')}
@@ -93,7 +81,7 @@ const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
       <div class="mx-auto w-full max-w-lg text-center">
         <p
           data-nf-code
-          class="font-mono text-sm font-medium tracking-[0.2em] text-faint will-change-transform"
+          class="text-faint font-mono text-sm font-medium tracking-[0.2em] will-change-transform"
         >
           {t('notFound.code')}
         </p>
@@ -111,14 +99,14 @@ const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
         </div>
         <h1
           data-nf-title
-          class="mt-6 font-display text-3xl font-semibold tracking-tight text-paper will-change-transform sm:text-4xl"
+          class="font-display text-paper mt-6 text-3xl font-semibold tracking-tight will-change-transform sm:text-4xl"
           style="letter-spacing: -0.03em"
         >
           {t('notFound.title')}
         </h1>
         <p
           data-nf-body
-          class="mx-auto mt-4 max-w-md text-base leading-relaxed text-body will-change-transform"
+          class="text-body mx-auto mt-4 max-w-md text-base leading-relaxed will-change-transform"
         >
           {t('notFound.body')}
         </p>
@@ -136,8 +124,11 @@ const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
       </div>
     </main>
 
-    <footer class="relative z-10 border-t border-line px-4 py-6 sm:px-6">
-      <p data-nf-footer class="mx-auto max-w-6xl text-center font-mono text-[11px] text-faint">
+    <footer class="border-line relative z-10 border-t px-4 py-6 sm:px-6">
+      <p
+        data-nf-footer
+        class="text-faint mx-auto max-w-6xl text-center font-mono text-[11px]"
+      >
         {t('footer.notAffiliated')}
       </p>
     </footer>
@@ -147,10 +138,18 @@ const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
 <script>
   import gsap from 'gsap';
 
+  // Content is visible in markup; only a visible tab shortly after load
+  // gets the entrance, and a failsafe reverts it if the ticker stalls.
   const root = document.querySelector('[data-not-found]');
   if (root) {
     const mm = gsap.matchMedia();
     mm.add('(prefers-reduced-motion: no-preference)', () => {
+      // Checked inside the handler: it can also fire on a later media-query
+      // toggle, and must not re-hide a page the visitor is already reading.
+      if (document.visibilityState !== 'visible' || performance.now() > 2000) {
+        return;
+      }
+
       const code = root.querySelector('[data-nf-code]');
       const brand = root.querySelector('[data-nf-brand]');
       const title = root.querySelector('[data-nf-title]');
@@ -170,6 +169,14 @@ const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
         .to(title, { autoAlpha: 1, y: 0, duration: 0.55 }, '-=0.25')
         .to(body, { autoAlpha: 1, y: 0, duration: 0.45 }, '-=0.3')
         .to(actions, { autoAlpha: 1, y: 0, duration: 0.4 }, '-=0.25');
+
+      const failsafe = window.setTimeout(() => {
+        if (tl.progress() === 0) {
+          mm.revert();
+        }
+      }, 1200);
+
+      return () => window.clearTimeout(failsafe);
     });
   }
 </script>

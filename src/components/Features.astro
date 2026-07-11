@@ -15,7 +15,6 @@ const features = [
     key: 'browse',
     title: t('features.browse.title'),
     description: t('features.browse.description'),
-    label: t('features.browse.eyebrow'),
     src: 'browse.png',
     srcDark: 'browse-dark.png',
     alt: t('features.browse.shotAlt'),
@@ -25,7 +24,6 @@ const features = [
     key: 'filter',
     title: t('features.filter.title'),
     description: t('features.filter.description'),
-    label: t('features.filter.eyebrow'),
     src: 'filter-panel.png',
     srcDark: null as string | null,
     alt: t('features.filter.shotAlt'),
@@ -35,7 +33,6 @@ const features = [
     key: 'files',
     title: t('features.files.title'),
     description: t('features.files.description'),
-    label: t('features.files.eyebrow'),
     src: 'file-preview.png',
     srcDark: null as string | null,
     alt: t('features.files.shotAlt'),
@@ -45,7 +42,6 @@ const features = [
     key: 'home',
     title: t('features.home.title'),
     description: t('features.home.description'),
-    label: t('features.home.eyebrow'),
     src: 'home-feed.png',
     srcDark: null as string | null,
     alt: t('features.home.shotAlt'),
@@ -55,7 +51,6 @@ const features = [
     key: 'spaces',
     title: t('features.spaces.title'),
     description: t('features.spaces.description'),
-    label: t('features.spaces.eyebrow'),
     src: 'spaces-gallery.png',
     srcDark: null as string | null,
     alt: t('features.spaces.shotAlt'),
@@ -66,27 +61,21 @@ const features = [
 
 <section
   id="features"
-  class="border-b border-line px-4 py-20 sm:px-6 sm:py-28"
+  class="border-line border-b px-4 py-20 sm:px-6 sm:py-28"
   aria-label={t('features.region')}
 >
   <div class="mx-auto max-w-6xl space-y-20 sm:space-y-28">
     {
       features.map((f) => (
-        <article
-          data-feature
-          class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
-        >
+        <article data-feature class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div
             data-feature-copy
             class:list={['max-w-xl will-change-transform', f.reverse && 'lg:order-2']}
           >
-            <p class="font-mono text-xs font-medium tracking-wide text-faint uppercase">
-              {f.label}
-            </p>
-            <h2 class="mt-3 font-display text-2xl font-semibold tracking-tight text-paper sm:text-3xl">
+            <h2 class="font-display text-paper text-2xl font-semibold tracking-tight sm:text-3xl">
               {f.title}
             </h2>
-            <p class="mt-4 text-base leading-relaxed text-body">{f.description}</p>
+            <p class="text-body mt-4 text-base leading-relaxed">{f.description}</p>
           </div>
           <div
             data-feature-shot
@@ -99,7 +88,10 @@ const features = [
                 width="1600"
                 height="1000"
                 loading="lazy"
-                class:list={[f.srcDark ? 'shot-light' : null, 'h-auto w-full']}
+                class:list={[
+                  f.srcDark ? 'shot-light' : 'shot-light-only',
+                  'h-auto w-full',
+                ]}
               />
               {f.srcDark ? (
                 <img

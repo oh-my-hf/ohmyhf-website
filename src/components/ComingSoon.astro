@@ -26,16 +26,13 @@ const cards = [
 
 <section
   data-roadmap
-  class="border-b border-line px-4 py-20 sm:px-6 sm:py-28"
+  class="border-line border-b px-4 py-20 sm:px-6 sm:py-28"
   aria-label={t('comingSoon.region')}
 >
   <div class="mx-auto max-w-6xl">
     <header data-section-head class="max-w-xl will-change-transform">
-      <p class="font-mono text-xs font-medium tracking-wide text-faint uppercase">
-        {t('comingSoon.eyebrow')}
-      </p>
       <h2
-        class="mt-3 font-display text-2xl font-semibold tracking-tight text-paper sm:text-3xl"
+        class="font-display text-paper text-2xl font-semibold tracking-tight sm:text-3xl"
       >
         {t('comingSoon.title')}
       </h2>
@@ -46,15 +43,15 @@ const cards = [
         cards.map((card) => (
           <li
             data-roadmap-card
-            class="relative rounded-lg border border-line bg-panel p-6 will-change-transform sm:p-8"
+            class="border-line bg-panel relative rounded-lg border p-6 will-change-transform sm:p-8"
           >
-            <span class="absolute top-4 right-4 font-mono text-[10px] font-medium tracking-wide text-iris uppercase sm:top-5 sm:right-5">
+            <span class="text-iris absolute top-4 right-4 font-mono text-[10px] font-medium tracking-wide uppercase sm:top-5 sm:right-5">
               {t('comingSoon.badge')}
             </span>
-            <h3 class="pr-24 font-display text-lg font-semibold tracking-tight text-paper">
+            <h3 class="font-display text-paper pr-24 text-lg font-semibold tracking-tight">
               {card.title}
             </h3>
-            <p class="mt-3 text-sm leading-relaxed text-body">{card.description}</p>
+            <p class="text-body mt-3 text-sm leading-relaxed">{card.description}</p>
           </li>
         ))
       }

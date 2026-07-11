@@ -22,9 +22,8 @@
   src: url('@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2')
     format('woff2-variations');
   unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
-    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
-    U+FFFD;
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @import '@fontsource/ibm-plex-mono/latin-400.css';
@@ -89,7 +88,8 @@
   --color-cta: #eef2ff;
   --color-cta-ink: #0a1020;
   --color-brand: #ffd21e;
-  --wash: radial-gradient(
+  --wash:
+    radial-gradient(
       ellipse 110% 75% at 50% -25%,
       rgb(99 102 241 / 0.28) 0%,
       rgb(56 48 120 / 0.12) 32%,
@@ -100,8 +100,7 @@
       rgb(255 210 30 / 0.06) 0%,
       transparent 50%
     );
-  --shot-shadow:
-    0 0 0 1px rgb(165 180 252 / 0.12), 0 16px 48px rgb(0 0 0 / 0.55);
+  --shot-shadow: 0 0 0 1px rgb(165 180 252 / 0.12), 0 16px 48px rgb(0 0 0 / 0.55);
   --header-bg: rgb(7 11 20 / 0.78);
 }
 
@@ -139,21 +138,23 @@
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-focus;
+    @apply outline-focus outline-2 outline-offset-2;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-cta px-5 py-2.5 text-sm font-medium text-cta-ink transition-colors hover:bg-cta/90;
+    @apply bg-cta text-cta-ink hover:bg-cta/90 inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition-colors;
   }
 
   :root[data-theme='dark'] .btn-primary {
-    box-shadow: 0 0 0 1px rgb(165 180 252 / 0.2), 0 8px 24px rgb(0 0 0 / 0.35);
+    box-shadow:
+      0 0 0 1px rgb(165 180 252 / 0.2),
+      0 8px 24px rgb(0 0 0 / 0.35);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-panel px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:border-iris/35 hover:bg-panel-2;
+    @apply border-line bg-panel text-paper hover:border-iris/35 hover:bg-panel-2 inline-flex items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors;
   }
 
   :root[data-theme='dark'] .btn-secondary {
@@ -161,7 +162,7 @@
   }
 
   .shot-frame {
-    @apply overflow-hidden rounded-lg border border-line bg-panel;
+    @apply border-line bg-panel overflow-hidden rounded-lg border;
     box-shadow: var(--shot-shadow);
   }
 
@@ -186,6 +187,26 @@
   :root[data-theme='dark'] .shot-dark {
     display: block;
   }
+
+  /* Light-only screenshots: soften the glare on dark until dark captures land. */
+  :root[data-theme='dark'] .shot-light-only {
+    filter: brightness(0.85);
+  }
+
+  /* Download matrix CTAs: secondary at rest; platform detection promotes one. */
+  .download-cta {
+    @apply border-line bg-panel-2 text-paper hover:border-iris/35 inline-flex items-center justify-center rounded-full border px-5 py-2.5 text-sm font-medium transition-colors;
+  }
+
+  [data-download-platform][data-active='true'] .download-cta {
+    @apply bg-cta text-cta-ink hover:bg-cta/90 border-transparent;
+  }
+
+  :root[data-theme='dark'] [data-download-platform][data-active='true'] .download-cta {
+    box-shadow:
+      0 0 0 1px rgb(165 180 252 / 0.2),
+      0 8px 24px rgb(0 0 0 / 0.35);
+  }
 }
 
 /* Motion is owned by GSAP (src/scripts/motion.ts). CSS only hints layers. */
@@ -197,23 +218,6 @@
   @media (prefers-reduced-motion: reduce) {
     .will-change-transform {
       will-change: auto;
-    }
-  }
-
-  /* Avoid FOUC: hide hero entrance targets until GSAP takes over (JS only). */
-  @media (prefers-reduced-motion: no-preference) {
-    html.js [data-hero-brand],
-    html.js [data-hero-title],
-    html.js [data-hero-sub],
-    html.js [data-hero-cta],
-    html.js [data-hero-meta],
-    html.js [data-hero-shot],
-    html.js [data-nf-code],
-    html.js [data-nf-brand],
-    html.js [data-nf-title],
-    html.js [data-nf-body],
-    html.js [data-nf-actions] {
-      visibility: hidden;
     }
   }
 }
