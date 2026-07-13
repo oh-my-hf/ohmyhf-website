@@ -1,0 +1,79 @@
+---
+import { useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+/** Spare captures from the same session as the Features shots — not (yet) worth a full row each. */
+const shots = [
+  {
+    src: 'dataset-preview.png',
+    title: t('showcase.datasetPreview.title'),
+    alt: t('showcase.datasetPreview.alt'),
+  },
+  {
+    src: 'pr-files.png',
+    title: t('showcase.prFiles.title'),
+    alt: t('showcase.prFiles.alt'),
+  },
+  {
+    src: 'space-runner.png',
+    title: t('showcase.spaceRunner.title'),
+    alt: t('showcase.spaceRunner.alt'),
+  },
+  {
+    src: 'user-profile.png',
+    title: t('showcase.userProfile.title'),
+    alt: t('showcase.userProfile.alt'),
+  },
+  {
+    src: 'post-page.png',
+    title: t('showcase.postPage.title'),
+    alt: t('showcase.postPage.alt'),
+  },
+  {
+    src: 'settings-modal.png',
+    title: t('showcase.settingsModal.title'),
+    alt: t('showcase.settingsModal.alt'),
+  },
+] as const;
+---
+
+<section
+  data-showcase
+  class="border-line border-b px-4 py-20 sm:px-6 sm:py-28"
+  aria-label={t('showcase.region')}
+>
+  <div class="mx-auto max-w-6xl">
+    <header data-section-head class="max-w-xl will-change-transform">
+      <h2 class="font-display text-paper text-2xl font-semibold tracking-tight sm:text-3xl">
+        {t('showcase.title')}
+      </h2>
+    </header>
+
+    <ul class="mt-12 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6">
+      {
+        shots.map((shot) => (
+          <li data-showcase-item class="min-w-0 will-change-transform">
+            <figure class="shot-frame">
+              <img
+                src={`${base}/${shot.src}`}
+                alt={shot.alt}
+                width="1600"
+                height="1000"
+                loading="lazy"
+                class="shot-light-only h-auto w-full"
+              />
+            </figure>
+            <p class="text-body mt-2.5 text-sm leading-snug">{shot.title}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

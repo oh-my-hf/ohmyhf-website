@@ -72,6 +72,34 @@
       "shotAlt": "Spaces gallery with colorful Space cards"
     }
   },
+  "showcase": {
+    "region": "More screens",
+    "title": "There's more inside.",
+    "datasetPreview": {
+      "title": "Preview dataset rows before you download anything.",
+      "alt": "Dataset preview table for stanfordnlp/imdb"
+    },
+    "prFiles": {
+      "title": "Full PR review — diffs, comments, and all.",
+      "alt": "Pull request files-changed view with diffs"
+    },
+    "spaceRunner": {
+      "title": "Run a Space right inside the app.",
+      "alt": "A running Space open in its Run tab"
+    },
+    "userProfile": {
+      "title": "Public profiles — repos, papers, and activity.",
+      "alt": "Public user profile page"
+    },
+    "postPage": {
+      "title": "Read community posts in place.",
+      "alt": "A community post opened in its own page"
+    },
+    "settingsModal": {
+      "title": "Account, network, privacy — every setting, one modal.",
+      "alt": "Settings modal with account, network, and privacy sections"
+    }
+  },
   "comingSoon": {
     "region": "Coming soon",
     "title": "On the roadmap.",

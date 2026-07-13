@@ -72,6 +72,34 @@
       "shotAlt": "Spaces 画廊：彩色 Space 卡片网格"
     }
   },
+  "showcase": {
+    "region": "更多界面",
+    "title": "不止这些。",
+    "datasetPreview": {
+      "title": "下载前，先预览数据集的行内容。",
+      "alt": "stanfordnlp/imdb 数据集预览表格"
+    },
+    "prFiles": {
+      "title": "完整 PR 审查 —— diff、评论，一应俱全。",
+      "alt": "Pull Request 的文件变更 diff 视图"
+    },
+    "spaceRunner": {
+      "title": "无需离开应用即可运行 Space。",
+      "alt": "在 Run 标签页中运行的 Space"
+    },
+    "userProfile": {
+      "title": "公开主页 —— 仓库、论文与动态一览。",
+      "alt": "公开用户主页"
+    },
+    "postPage": {
+      "title": "在原地阅读社区帖子。",
+      "alt": "独立页面打开的社区帖子"
+    },
+    "settingsModal": {
+      "title": "账户、网络、隐私 —— 所有设置一个弹窗搞定。",
+      "alt": "包含账户、网络与隐私分区的设置弹窗"
+    }
+  },
   "comingSoon": {
     "region": "即将推出",
     "title": "路线图上，即将到来。",

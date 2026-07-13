@@ -58,9 +58,9 @@ Output is written to `dist/` and can be served by any static host.
 3. Install command: `pnpm install` (enable pnpm in the Pages build image, or use `npx pnpm@10 install`).
 4. Deploy on every push to `main` (or your chosen production branch).
 
-## Placeholder media
+## Screenshots
 
-Product screenshots live in `public/` (e.g. `browse.png`, `home-feed.png`). The landing page uses them directly. Regenerate social assets with:
+Product screenshots live in `public/` (e.g. `browse.png`, `home-feed.png`), captured from the `oh-my-hf/ohmyhf` desktop app — see [docs/media-replacement.md](docs/media-replacement.md) for the capture pipeline. The landing page uses them directly. Regenerate social assets with:
 
 ```bash
 pnpm generate:favicon   # white-backed tab icon from public/icon-source.png

@@ -18,6 +18,7 @@ const REVEAL_SELECTOR = [
   '[data-feature-copy]',
   '[data-feature-shot]',
   '[data-roadmap-card]',
+  '[data-showcase-item]',
   '[data-download-platform]',
   '[data-section-head]',
 ].join(', ');
@@ -154,6 +155,37 @@ export function initMotion(root: ParentNode = document): void {
           });
         }
       });
+
+      const showcase = root.querySelector('[data-showcase]');
+      if (showcase) {
+        const head = showcase.querySelector('[data-section-head]');
+        const items = showcase.querySelectorAll('[data-showcase-item]');
+        if (head) {
+          gsap.from(head, {
+            autoAlpha: 0,
+            y: 20,
+            duration: 0.55,
+            scrollTrigger: {
+              trigger: showcase,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+            },
+          });
+        }
+        if (items.length) {
+          gsap.from(items, {
+            autoAlpha: 0,
+            y: 24,
+            duration: 0.5,
+            stagger: 0.08,
+            scrollTrigger: {
+              trigger: showcase,
+              start: 'top 78%',
+              toggleActions: 'play none none none',
+            },
+          });
+        }
+      }
 
       const roadmap = root.querySelector('[data-roadmap]');
       if (roadmap) {

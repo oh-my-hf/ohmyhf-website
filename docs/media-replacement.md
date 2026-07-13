@@ -1,23 +1,53 @@
-# Placeholder media replacement
+# Screenshot pipeline
 
-Product screenshots and recordings are not available yet. Marketing visuals use HTML/CSS UI mockups (and a generated OG image) that can be swapped for real assets later.
+Marketing screenshots are real app captures, not mockups. They're generated from the
+`oh-my-hf/ohmyhf` desktop app repo and copied into `public/` here — there's no local
+mockup/placeholder path in this repo anymore.
 
-Each mockup component includes a `PLACEHOLDER` comment with the intended filename.
+## Source of truth
 
-## Inventory
+In `ohmyhf/apps/desktop`:
 
-| Location | Component / asset | Current state | Future asset spec | Replacement steps |
-| -------- | ----------------- | ------------- | ----------------- | ----------------- |
-| Hero | `src/components/mockups/HeroAppWindow.astro` | CSS model of the macOS-style triple-pane app window | `hero-app-window.png` — recommended 2560×1600 @2x (or short silent loop ≤8s WebM/MP4 of the same view) | Capture a real app screenshot at that size. Replace the mockup markup in `Hero.astro` with an `<img>` (or `<video>`) pointing at `public/media/hero-app-window.png`, keeping explicit `width`/`height`. Remove or keep the Astro mockup file unused. |
-| Features · Browse | `src/components/mockups/FeatureBrowse.astro` | CSS close-up of the triple-pane browse UI | `feature-browse.png` — recommended 2560×1600 @2x | Same pattern: drop PNG under `public/media/`, swap the mockup in `Features.astro` for an `<img>`. |
-| Features · Command | `src/components/mockups/FeatureCommandPalette.astro` | CSS close-up of the Cmd+K palette | `feature-command-palette.png` — recommended 2560×1600 @2x | Same as above. |
-| Features · Downloads | `src/components/mockups/FeatureDownloads.astro` | CSS close-up of the download queue | `feature-downloads.png` — recommended 2560×1600 @2x | Same as above. |
-| Features · Cache | `src/components/mockups/FeatureCache.astro` | CSS close-up of cache disk usage | `feature-cache.png` — recommended 2560×1600 @2x | Same as above. |
-| Social share | `public/og.png` | Generated static PNG (1200×630) via `pnpm generate:og` | Keep 1200×630; optionally regenerate from a real hero crop | Edit `scripts/generate-og.mjs` (or replace `public/og.png` directly). Re-run `pnpm generate:og` if using the script. Do not add HF logos or HF yellow. |
+```sh
+pnpm build                    # electron-vite build, from the ohmyhf repo root
+pnpm run test:screenshots     # CAPTURE_SCREENSHOTS=1 playwright test --config playwright.screenshots.config.ts
+```
+
+This drives the real Electron app (signed out, English, light + dark theme) through Browse,
+Filter, Files, Home, Spaces, and a few not-yet-used views, and writes PNGs to
+`ohmyhf/docs/screenshots/`. The capture steps live in
+`apps/desktop/e2e/capture-screenshots.spec.ts`.
+
+Copy the ones this site uses straight into `public/` here, matching filenames:
+
+| Site usage | Files |
+| ---------- | ----- |
+| Hero + Features · Browse | `browse.png`, `browse-dark.png` |
+| Features · Filter | `filter-panel.png`, `filter-panel-dark.png` |
+| Features · Files | `file-preview.png`, `file-preview-dark.png` |
+| Features · Home | `home-feed.png`, `home-feed-dark.png` |
+| Features · Spaces | `spaces-gallery.png`, `spaces-gallery-dark.png` |
+
+`src/components/Features.astro` renders both a `srcDark` (shown via the `shot-dark` class
+in dark theme) and the light `src`; only set `srcDark` once the dark capture actually exists,
+otherwise the light shot gets the `shot-light-only` dimming treatment instead.
+
+Captured but **not currently placed on any page**: `dataset-preview.png`, `pr-files.png`,
+`space-runner.png`, `user-profile.png`, `post-page.png`, `settings-modal.png`. They're spare
+material from the same capture run — useful if a future section wants them, otherwise leave
+them out rather than padding the page with more alternating rows (see DESIGN.md's row-fatigue
+note).
+
+## Social share
+
+`public/og.png` is generated separately, not from the app:
+
+```sh
+pnpm generate:og   # scripts/generate-og.mjs → public/og.png, 1200×630
+```
 
 ## Conventions
 
-- Prefer `public/media/<name>.png` for screenshots so paths stay stable.
-- Always set explicit `width` and `height` (and `alt` from i18n) to avoid CLS.
+- Always set explicit `width`/`height` (and `alt` from i18n) to avoid CLS.
 - Do not introduce Hugging Face logos, mascots, 🤗 emoji, or HF brand yellow (`#FFD21E` and near).
 - Coming soon / trust / download / FAQ sections intentionally have no product mockups.
