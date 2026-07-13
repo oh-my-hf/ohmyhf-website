@@ -1,5 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import { useTranslations, type Locale } from '../i18n';
+import datasetPreview from '../assets/images/dataset-preview.png';
+import prFiles from '../assets/images/pr-files.png';
+import spaceRunner from '../assets/images/space-runner.png';
+import userProfile from '../assets/images/user-profile.png';
+import postPage from '../assets/images/post-page.png';
+import settingsModal from '../assets/images/settings-modal.png';
 
 interface Props {
   locale: Locale;
@@ -7,37 +14,36 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 /** Spare captures from the same session as the Features shots — not (yet) worth a full row each. */
 const shots = [
   {
-    src: 'dataset-preview.png',
+    src: datasetPreview,
     title: t('showcase.datasetPreview.title'),
     alt: t('showcase.datasetPreview.alt'),
   },
   {
-    src: 'pr-files.png',
+    src: prFiles,
     title: t('showcase.prFiles.title'),
     alt: t('showcase.prFiles.alt'),
   },
   {
-    src: 'space-runner.png',
+    src: spaceRunner,
     title: t('showcase.spaceRunner.title'),
     alt: t('showcase.spaceRunner.alt'),
   },
   {
-    src: 'user-profile.png',
+    src: userProfile,
     title: t('showcase.userProfile.title'),
     alt: t('showcase.userProfile.alt'),
   },
   {
-    src: 'post-page.png',
+    src: postPage,
     title: t('showcase.postPage.title'),
     alt: t('showcase.postPage.alt'),
   },
   {
-    src: 'settings-modal.png',
+    src: settingsModal,
     title: t('showcase.settingsModal.title'),
     alt: t('showcase.settingsModal.alt'),
   },
@@ -61,12 +67,12 @@ const shots = [
         shots.map((shot) => (
           <li data-showcase-item class="min-w-0 will-change-transform">
             <figure class="shot-frame">
-              <img
-                src={`${base}/${shot.src}`}
+              <Image
+                src={shot.src}
                 alt={shot.alt}
-                width="1600"
-                height="1000"
-                loading="lazy"
+                width={480}
+                height={300}
+                sizes="(min-width: 640px) 368px, 45vw"
                 class="shot-light-only h-auto w-full"
               />
             </figure>

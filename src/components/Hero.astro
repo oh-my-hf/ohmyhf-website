@@ -1,6 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import { REPO_URL, released, version } from '../config';
 import { useTranslations, type Locale } from '../i18n';
+import browseLight from '../assets/images/browse.png';
+import browseDark from '../assets/images/browse-dark.png';
 
 interface Props {
   locale: Locale;
@@ -113,21 +116,21 @@ const primaryExternal = !released;
         data-hero-shot
         class="shot-frame mx-auto max-w-5xl will-change-transform"
       >
-        <img
-          src={`${base}/browse.png`}
+        <Image
+          src={browseLight}
           alt={t('hero.shotAlt')}
-          width="2400"
-          height="1500"
+          width={1024}
+          height={640}
           class="shot-light h-auto w-full"
-          fetchpriority="high"
+          priority
         />
-        <img
-          src={`${base}/browse-dark.png`}
+        <Image
+          src={browseDark}
           alt={t('hero.shotAlt')}
-          width="2400"
-          height="1500"
+          width={1024}
+          height={640}
           class="shot-dark h-auto w-full"
-          fetchpriority="high"
+          priority
         />
       </figure>
     </div>

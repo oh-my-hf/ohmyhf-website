@@ -1,7 +1,7 @@
 # Screenshot pipeline
 
 Marketing screenshots are real app captures, not mockups. They're generated from the
-`oh-my-hf/ohmyhf` desktop app repo and copied into `public/` here — there's no local
+`oh-my-hf/ohmyhf` desktop app repo and copied into `src/assets/images/` here — there's no local
 mockup/placeholder path in this repo anymore.
 
 ## Source of truth
@@ -18,7 +18,7 @@ Filter, Files, Home, Spaces, and a few not-yet-used views, and writes PNGs to
 `ohmyhf/docs/screenshots/`. The capture steps live in
 `apps/desktop/e2e/capture-screenshots.spec.ts`.
 
-Copy the ones this site uses straight into `public/` here, matching filenames:
+Copy the ones this site uses straight into `src/assets/images/` here, matching filenames:
 
 | Site usage | Files |
 | ---------- | ----- |
@@ -31,6 +31,10 @@ Copy the ones this site uses straight into `public/` here, matching filenames:
 `src/components/Features.astro` renders both a `srcDark` (shown via the `shot-dark` class
 in dark theme) and the light `src`; only set `srcDark` once the dark capture actually exists,
 otherwise the light shot gets the `shot-light-only` dimming treatment instead.
+
+Images are imported (`astro:assets`) rather than referenced by URL, so overwriting a file here
+with a refreshed capture produces a new content-hashed `/_astro/browse.<hash>.webp` URL on the
+next build — visitors never get a stale cached copy of an old screenshot.
 
 Captured but **not currently placed on any page**: `dataset-preview.png`, `pr-files.png`,
 `space-runner.png`, `user-profile.png`, `post-page.png`, `settings-modal.png`. They're spare
