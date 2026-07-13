@@ -30,6 +30,36 @@ const ogLocale = locale === 'zh-CN' ? 'zh_CN' : 'en_US';
 const ogLocaleAlt = locale === 'zh-CN' ? 'en_US' : 'zh_CN';
 const ogImage = new URL('/og.png', site).href;
 
+const keywords =
+  locale === 'zh-CN'
+    ? [
+        'Hugging Face',
+        'Hugging Face Hub',
+        'Hugging Face 桌面客户端',
+        'Hugging Face 离线浏览',
+        '模型浏览器',
+        '数据集浏览器',
+        '模型管理工具',
+        '开源',
+        'macOS',
+        'Windows',
+        'Linux',
+      ]
+    : [
+        'Hugging Face',
+        'Hugging Face Hub',
+        'Hugging Face desktop client',
+        'Hugging Face app',
+        'model browser',
+        'dataset browser',
+        'model manager',
+        'AI model downloader',
+        'open source',
+        'macOS',
+        'Windows',
+        'Linux',
+      ];
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -39,6 +69,7 @@ const jsonLd = {
   license: 'https://www.apache.org/licenses/LICENSE-2.0',
   url: site.href,
   downloadUrl: `${REPO_URL}/releases`,
+  keywords: keywords.join(', '),
   offers: {
     '@type': 'Offer',
     price: '0',
